@@ -1,2 +1,122 @@
-# go_sudoku
-Normal, Killer, Samurai Sudoku with PDF generation
+# Go Sudoku
+
+A cross-platform Sudoku game written in Go, featuring three puzzle variants, PDF book export, and full localization support.
+
+![Go](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey?style=flat)
+[![Release](https://img.shields.io/github/v/release/Kellerman81/go_sudoku)](https://github.com/Kellerman81/go_sudoku/releases)
+
+---
+
+## Features
+
+### Three Puzzle Variants
+
+| Mode | Description |
+|------|-------------|
+| **Normal** | Classic 9×9 Sudoku |
+| **Killer** | 9×9 grid with colored cages and sum constraints |
+| **Samurai** | Five overlapping 9×9 grids forming a 21×21 puzzle |
+
+### Four Difficulty Levels
+
+- **Easy** — 38 given clues
+- **Medium** — 30 given clues
+- **Hard** — 25 given clues
+- **Expert** — 22 given clues
+
+Difficulty is determined by a technique-based grader, not just clue count.
+
+### Gameplay
+
+- Enter numbers via keyboard (1–9) or the on-screen number pad
+- Navigate the grid with arrow keys — no mouse required
+- **Pencil marks** — toggle candidate notes per cell (`N` key)
+- **Undo** — step back through every move and pencil mark change
+- **Check** — validate filled cells; correct answers turn blue, wrong ones red
+- **Hints** — reveal a single incorrect or empty cell (highlighted briefly in green)
+- **Give Up** — reveal the full solution when you're stuck
+- **Optional limits** — cap hints (1 / 2 / 3 / 5) and errors (1 / 3 / 5 / 10) per game
+- Timer pauses automatically when the window loses focus
+
+### Statistics & History
+
+Every completed game is saved with:
+
+- Game type, difficulty, duration
+- Hints used and errors made
+- Win / loss / gave-up result
+- Score: `1,000,000 ÷ (seconds × 1.5^hints × 1.2^errors)`
+
+The History screen shows totals, best time, average time, and best score across all sessions.
+
+### PDF Export
+
+Generate printable puzzle books in a few clicks:
+
+- Choose how many Normal, Killer, and Samurai puzzles to include
+- Select difficulty and layout (1 / 2 / 4 / 6 / 9 puzzles per page)
+- Optionally include a solutions section and a stats summary page
+- Real-time progress indicator during generation
+- Export the current puzzle directly as a two-page PDF (puzzle + solution)
+
+### Localization
+
+The interface is fully translated into:
+
+- **English**
+- **German** (Deutsch)
+
+Language can be changed at any time from the main menu.
+
+---
+
+## Installation
+
+Download the latest binary for your platform from the [Releases](https://github.com/Kellerman81/go_sudoku/releases) page.
+
+| Platform | File |
+|----------|------|
+| Windows x64 | `go_sudoku_windows_amd64.exe` |
+| Linux x64 | `go_sudoku_linux_amd64` |
+
+On Linux, make the binary executable before running:
+
+```bash
+chmod +x go_sudoku_linux_amd64
+./go_sudoku_linux_amd64
+```
+
+---
+
+## Building from Source
+
+**Prerequisites:** Go 1.23+, a C compiler, and the Gio UI system dependencies for your platform.
+
+```bash
+git clone https://github.com/Kellerman81/go_sudoku.git
+cd go_sudoku
+go build .
+```
+
+For Linux you will also need the Wayland/X11 development libraries:
+
+```bash
+sudo apt-get install gcc libwayland-dev libx11-dev libxkbcommon-x11-dev \
+  libgles2-mesa-dev libegl1-mesa-dev libxcursor-dev libvulkan-dev
+```
+
+For iOS and Android builds, follow the platform-specific setup steps in the [Gio installation guide](https://gioui.org/doc/install).
+
+---
+
+## Built With
+
+- [Gio](https://gioui.org/) — cross-platform GUI framework
+- [gofpdf](https://github.com/jung-kurt/gofpdf) — PDF generation
+
+---
+
+## License
+
+MIT
